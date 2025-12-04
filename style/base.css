@@ -1,0 +1,14 @@
+:root {
+	--fg: #35341A;
+	--bg: #D2F3A5;
+	--code-fg: #09CF00;
+	--code-bg: black;
+	--border-color: #34A54C;
+	--code-font: Courier, monospace;
+	--tab-color: #8EB25D;
+}
+
+* {
+	box-sizing: border-box;
+}
+

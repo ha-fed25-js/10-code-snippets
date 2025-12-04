@@ -1,0 +1,129 @@
+
+code, .code {
+	background-color: var(--code-bg);
+	color: var(--code-fg);
+	border: 3px solid var(--border-color);
+	border-radius: 0.3em;
+	margin: 1em 0;
+	padding: 1em 2em;
+	display: block;
+	font-family: var(--code-font);
+	font-size: 16px;
+}
+body {
+	font-size: 16px;
+	margin: 0;
+	padding: 0;
+	background-color: var(--bg);
+	color: var(--fg);
+	font-family: Open sans;
+	padding: 0.5em 1em;
+}
+hr {
+	border: 1px solid var(--border-color);
+	margin-bottom: 2em;
+}
+header {
+	border-bottom: 2px solid var(--border-color);
+}
+header h1 {
+	padding-left: 1rem;
+	margin: 0.3em 0px;
+	font-family: var(--code-font);
+}
+main {
+	padding: 0.5em 1em;
+/* 	background-color: #071E0C; */
+}
+section {
+	padding: 0.5em 0;
+}
+.framed {
+	box-shadow: 0px 0px 4px var(--border-color);
+	margin-top: 0.25em;
+	margin-bottom: 0.75em;
+	padding-left: 1em;
+}
+.intro {
+	font-style: italic;
+}
+
+
+button:hover {
+	cursor: pointer;
+}
+
+button {
+	padding: 0.3em 0.8em;
+	border: none;
+	transition: 0.5s all ease-in-out;
+}
+.menu button {
+	font-size: 1.2rem;
+	border-radius: 0.6em;
+	background-color: var(--tab-color);
+}
+.menu button:hover, .menu button.selected {
+	background-color: var(--border-color);
+}
+div.vote {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+.vote-buttons {
+	position: absolute;
+	right: 0px;
+	top: 0.4em;
+}
+button.vote {
+	padding: 0.5em 0.2em;
+	border: none;
+	background: none;
+	font-size: 125%;
+	transition: 0.25s transform;
+}
+button.vote:hover {
+	transform: translateY(-5px) rotate(-10deg);
+}
+.score {
+	font-family: var(--code-font);
+	font-size: 120%;
+	font-weight: bold;
+	color: #FC5E37;
+	display: inline-block;
+	text-align: center;
+	padding: 0.2em 0.4em;
+}
+
+
+.form {
+	display: flex;
+	flex-direction: column;
+}
+.form label {
+	font-weight: bold;
+}
+.form input {
+	background-color: #E2F1CC;
+}
+.form input, .form textarea {
+	padding: 0.75em;
+}
+textarea {
+	color: var(--code-fg);
+	background-color: var(--code-bg);
+}
+.form button {
+	font-size: 1.2rem;
+	background-color: var(--tab-color);
+}
+.form button:hover {
+	background-color: var(--border-color);
+}
+
+button:disabled {
+	background-color: lightgray;
+}
+
+.hidden { display: none; }
