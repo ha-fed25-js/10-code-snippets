@@ -6,41 +6,21 @@ Vår MVP ska innehålla:
 3. lägg till ny snippet
 */
 
-import { renderSnippets } from "./render.js"
-
+import { doFetchLatest } from "./api.js"
 
 const btnShowLatest = document.querySelector('#btn-show-latest')
 const btnShowUpload = document.querySelector('#btn-show-upload')
 const btnPostSnippet = document.querySelector('#btn-post-snippet')
-const views = document.querySelectorAll('.view')  // representerar olika vyer
 const inputTitle = document.querySelector('#i1')
 const inputContent = document.querySelector('#i2')
+const snippetView = document.querySelector('.snippet-view')
 
 const baseUrl = 'https://www.forverkliga.se/JavaScript/api/api-snippets.php'
 
 btnShowLatest.addEventListener('click', async () => {
-	btnShowLatest.disabled = true
-
-	hideComponents()
-	const snippetView = document.querySelector('.snippet-view')
-	snippetView.classList.remove('hidden')
-
-	const url = baseUrl + '?latest'
-
-	try {
-		const response = await fetch(url)
-		const data = await response.json()
-
-		// Hur ser datan i serverns svar ut?
-		console.log('Data from server: ', data)
-		renderSnippets(data)
-
-	} catch(error) {
-		// TODO: informera användaren
-	} finally {
-		btnShowLatest.disabled = false
-	}
+	doFetchLatest(btnShowLatest, snippetView)
 })
+
 
 
 btnShowUpload.addEventListener('click', () => {
@@ -49,15 +29,11 @@ btnShowUpload.addEventListener('click', () => {
 
 	const uploadView = document.querySelector('.upload')
 	uploadView.classList.remove('hidden')
-
 })
 
-function hideComponents() {
-	// Dölj alla vyer
-	views.forEach(com => com.classList.add('hidden'))
-	// console.log('hideComponent ', views.length)
-}
 
+
+// TODO: flytta ut innehållet till en egen funktion i api.js
 btnPostSnippet.addEventListener('click', async () => {
 	// hindra att användaren klickar flera gånger på knappen
 	// samla in datan från formuläret
