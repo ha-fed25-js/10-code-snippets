@@ -6,13 +6,24 @@ Vår MVP ska innehålla:
 3. lägg till ny snippet
 */
 
-const btnLatest = document.querySelector('#btn-latest')
+import { renderSnippets } from "./render.js"
+
+
+const btnShowLatest = document.querySelector('#btn-show-latest')
+const btnShowUpload = document.querySelector('#btn-show-upload')
+const btnPostSnippet = document.querySelector('#btn-post-snippet')
+const views = document.querySelectorAll('.view')  // representerar olika vyer
+const inputTitle = document.querySelector('#i1')
+const inputContent = document.querySelector('#i2')
 
 const baseUrl = 'https://www.forverkliga.se/JavaScript/api/api-snippets.php'
 
-btnLatest.addEventListener('click', async () => {
-	btnLatest.disabled = true
-	// TODO: gör så att vi kan byta mellan flikar
+btnShowLatest.addEventListener('click', async () => {
+	btnShowLatest.disabled = true
+
+	hideComponents()
+	const snippetView = document.querySelector('.snippet-view')
+	snippetView.classList.remove('hidden')
 
 	const url = baseUrl + '?latest'
 
@@ -27,40 +38,68 @@ btnLatest.addEventListener('click', async () => {
 	} catch(error) {
 		// TODO: informera användaren
 	} finally {
-		btnLatest.disabled = false
+		btnShowLatest.disabled = false
 	}
 })
 
-function renderSnippets(snippets) {
-	const snippetsContainer = document.querySelector('.snippets')
-	const template = `
-	<h2> </h2>
-	<code> </code>
-	<div class="vote-buttons">
-		<button class="vote">🗑️</button>
-		<button class="vote">✍️</button>
-		<button class="vote">👍</button>
-		<button class="vote">👎</button>
-		<span class="score"> </span>
-	</div>
-	<p> Submitted: ? </p>
-	`
-	snippetsContainer.innerHTML = ''
 
-	snippets.forEach(snippet => {
-		const container = document.createElement('div')
-		container.classList.add('snippet')
-		container.innerHTML = template
-		// Använd innerHTML på elementen INNAN vi lägger in datan från användaren
+btnShowUpload.addEventListener('click', () => {
+	// console.log('Du klickade på "upload new"')
+	hideComponents()
 
-		container.querySelector('h2').textContent = snippet.title
-		container.querySelector('code').textContent = snippet.content
-		container.querySelector('p').textContent = `Submitted: ${snippet.upload_dt}`
-		container.querySelector('.score').textContent = snippet.score
+	const uploadView = document.querySelector('.upload')
+	uploadView.classList.remove('hidden')
 
-		snippetsContainer.append(container)
-	})
+})
+
+function hideComponents() {
+	// Dölj alla vyer
+	views.forEach(com => com.classList.add('hidden'))
+	// console.log('hideComponent ', views.length)
 }
+
+btnPostSnippet.addEventListener('click', async () => {
+	// hindra att användaren klickar flera gånger på knappen
+	// samla in datan från formuläret
+	// paketera datan i ett objekt
+	// LÄS DOKUMENTATIONEN!!!!
+	// förbered fetch: omvandla datan med JSON.stringify, skapa ett inställningsobjekt
+	// anropa fetch och await (vänta på resultatet)
+	// kontrollera svaret från servern - gick det bra?
+	// om ja: byt till vyn "Latest" (bonusuppgift)
+	// om nej: visa meddelande för användaren
+
+	btnPostSnippet.disabled = true
+	let postData = {
+		add: '',
+		title: inputTitle.value,
+		content: inputContent.value
+	}
+	const options = {
+		method: 'POST',
+		headers: { 'Content-Type': 'application/json' },
+		body: JSON.stringify(postData)
+	}
+	const url = baseUrl + '?add'
+	try {
+		const response = await fetch(url, options)
+		const statusObject = await response.json()
+		// console.log('POST done, status: ', statusObject)
+		if( statusObject.status === 'success' ) {
+			// TODO: visa ett meddelande på sidan, eller
+			// TODO: bonusuppgift: visa "Latest" vyn (och hämta från API:et igen)
+		} else {
+			// TODO: visa ett meddelande på sidan, "Försök igen senare"
+		}
+
+
+	} catch(error) {
+		console.log('POST snippet, något gick fel: ', error.message)
+
+	} finally {
+		btnPostSnippet.disabled = false
+	}
+})
 /*
 example data from server:
 {

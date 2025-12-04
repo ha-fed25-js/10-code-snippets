@@ -16,13 +16,13 @@
 	</header>
 	<main class="show-components">
 		<section class="menu component">
-			<button class="selected" id="btn-latest"> Latest </button>
+			<button class="selected" id="btn-show-latest"> Latest </button>
 			<!-- <button> Best </button> -->
-			<button> Upload new </button>
+			<button id="btn-show-upload"> Upload new </button>
 		</section>
 		<hr />
 
-		<div class="component">
+		<div class="snippet-view view component">
 
 			<section class="framed">
 				<span class="intro">
@@ -71,7 +71,7 @@
 		</div>
 
 
-		<div class="component hidden">
+		<div class="view component hidden">
 		<section class="framed">
 			<span class="intro">
 			The most upvoted snippets from the community!
@@ -82,21 +82,21 @@
 		</div>
 
 
-		<div class="component hidden">
+		<div class="upload view component hidden">
 		<section class="framed">
 			<span class="intro">
 			Upload a new code snippet to the cloud!
 			</span>
 		</section>
 		<section class="form">
-			title content
+
 			<label for="i1"> Title </label>
 			<input id="i1" type="text">
 
 			<label for="i2"> Content </label>
 			<textarea id="i2" rows="8"></textarea>
 
-			<button disabled> Upload </button>
+			<button id="btn-post-snippet"> Upload </button>
 		</section>
 		</div>
 
